@@ -1,12 +1,8 @@
 import { combineReducers } from 'redux'
-
-const initialState = {
-  list: [],
-}
-const posts = (state = initialState, action) => {
-  return state
-}
+import posts from './posts'
+import comments from './comments'
 
 export default combineReducers({
   posts,
+  comments,
 })

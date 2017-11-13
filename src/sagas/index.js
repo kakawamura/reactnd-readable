@@ -47,6 +47,16 @@ export function* voteComment(action) {
   }
 }
 
+export function* createComment(action) {
+  try {
+    const comment = yield call(API.createComment, action.comment)
+    console.log(comment)
+    yield put({type: types.CREATE_COMMENT_SUCCEEDED, comment})
+  } catch (error) {
+    yield put({type: "VOTE_FAILED", error})
+  }
+}
+
 export function* updateComment(action) {
   try {
     const comment = yield call(API.updateComment, action.id, action.body)
@@ -71,6 +81,7 @@ export function* watchAPI() {
   yield takeEvery(types.FETCH_POST_COMMENTS, fetchPostComments)
   yield takeEvery(types.VOTE_POST, votePost)
   yield takeEvery(types.VOTE_COMMENT, voteComment)
+  yield takeEvery(types.CREATE_COMMENT, createComment)
   yield takeEvery(types.UPDATE_COMMENT, updateComment)
   yield takeEvery(types.DELETE_COMMENT, deleteComment)
 }

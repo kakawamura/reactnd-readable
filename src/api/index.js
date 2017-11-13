@@ -36,9 +36,18 @@ export const votePost = (id, option) => {
 }
 
 export const fetchPostComments = (id) => {
-  console.log(id)
   return fetch(`${api}/posts/${id}/comments`, { headers })
     .then(res => res.json())
+    .then(data => data)
+    .catch(error => error)
+}
+
+export const createComment = (comment) => {
+  return fetch(`${api}/comments`, { 
+    headers,
+    method: 'POST',
+    body: JSON.stringify(comment),
+  }).then(res => res.json())
     .then(data => data)
     .catch(error => error)
 }

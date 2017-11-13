@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as types from '../constants/actionTypes'
 import CommentList from './CommentList'
+import AddComment from './AddComment';
 
 class PostDetailPage extends Component {
 
@@ -19,6 +20,9 @@ class PostDetailPage extends Component {
         <div>{posts.detail.title}</div>
         <CommentList 
           comments={comments.list}
+        />
+        <AddComment
+          post={posts.detail}
         />
       </div>
     )

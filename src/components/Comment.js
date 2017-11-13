@@ -10,7 +10,7 @@ class Comment extends Component {
     body: '',
   }
 
-  onClickEdit() {
+  onClickEdit = () => {
     const { comment } = this.props
     this.setState({
       body: comment.body,
@@ -18,7 +18,7 @@ class Comment extends Component {
     })
   }
 
-  onClickDelete() {
+  onClickDelete = () => {
     const { comment, deleteComment } = this.props
     
     // TODO: Confirm
@@ -28,7 +28,7 @@ class Comment extends Component {
     })
   }
 
-  onChangeComment(e) {
+  onChangeComment = (e) => {
     this.setState({
       body: e.target.value,
     })

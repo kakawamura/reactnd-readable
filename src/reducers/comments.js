@@ -11,6 +11,11 @@ const comments = (state = initialState, action) => {
         ...state,
         list: action.data
       }
+    case types.CREATE_COMMENT_SUCCEEDED:
+      return {
+        ...state,
+        list: state.list.concat([action.comment])
+      }
     case types.UPDATE_COMMENT_SUCCEEDED:
       return {
         ...state,

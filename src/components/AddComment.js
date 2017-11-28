@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as types from '../constants/actionTypes'
+import uuid from 'uuid/v4'
 
 class AddComment extends Component {
 
@@ -25,6 +26,7 @@ class AddComment extends Component {
     const { post, createComment } = this.props
     const { author, body } = this.state
     createComment({
+      id: uuid(),
       parentId: post.id,
       author,
       body,

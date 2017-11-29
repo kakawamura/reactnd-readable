@@ -2,6 +2,35 @@ import { call, put, all, takeEvery } from 'redux-saga/effects'
 import * as API from '../api'
 import * as types from '../constants/actionTypes'
 
+
+export function* createPost(action) {
+  try {
+    const post = yield call(API.createPost, action.post)
+    yield put({type: types.CREATE_POST_SUCCEEDED, post})
+  } catch (error) {
+    yield put({type: "CREATE_FAILED", error})
+  }
+}
+
+export function* updatePost(action) {
+  try {
+    const post = yield call(API.updatePost, post)
+    yield put({type: types.UPDATE_POST_SUCCEEDED, post})
+  } catch (error) {
+    yield put({type: "VOTE_FAILED", error})
+  }
+}
+
+export function* deletePost(action) {
+  try {
+    const post = yield call(API.deleteComment, action.id)
+    yield put({type: types.DELETE_POST_SUCCEEDED, post})
+  } catch (error) {
+    yield put({type: "VOTE_FAILED", error})
+  }
+}
+
+
 export function* fetchPosts(action) {
   try {
     const data = yield call(API.fetchPosts)
@@ -84,6 +113,9 @@ export function* fetchCategories(action) {
 }
 
 export function* watchAPI() {
+  yield takeEvery(types.CREATE_POST, createPost)
+  yield takeEvery(types.UPDATE_POST, updatePost)
+  yield takeEvery(types.DELETE_POST, deletePost)
   yield takeEvery(types.FETCH_POSTS, fetchPosts)
   yield takeEvery(types.FETCH_POST, fetchPost)
   yield takeEvery(types.FETCH_POST_COMMENTS, fetchPostComments)

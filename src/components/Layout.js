@@ -6,9 +6,23 @@ import * as types from '../constants/actionTypes'
 import Header from './Header'
 import Radium from 'radium'
 
+const buttonSize = 89
+
 const styles = {
   layout: {
-  }
+  },
+  new: {
+    position: 'fixed',
+    bottom: 24,
+    right: 24,
+    width: buttonSize,
+    height: buttonSize,
+    borderRadius: buttonSize/2,
+    border: '1px solid #eee',
+    lineHeight: `${buttonSize}px`,
+    textAlign: 'center',
+    fontSize: 24,
+  },
 }
 
 class Layout extends Component {
@@ -24,6 +38,11 @@ class Layout extends Component {
       <div style={styles.layout}>
         <Header categories={categories.list}/>
         {this.props.children}
+        <Link
+          to='/posts/new'
+          style={styles.new}
+        >+</Link>
+
       </div>
     )
   }

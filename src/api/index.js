@@ -9,6 +9,35 @@ const headers = { 'Content-Type': 'application/json',
   'Authorization': token
 }
 
+export const createPost = (post) => {
+  return fetch(`${api}/posts`, { 
+    headers,
+    method: 'POST',
+    body: JSON.stringify(post),
+  }).then(res => res.json())
+    .then(data => data)
+    .catch(error => error)
+}
+
+export const updatePost = (post) => {
+  return fetch(`${api}/posts/${post.id}`, { 
+    headers,
+    method: 'PUT',
+    body: JSON.stringify(post),
+  }).then(res => res.json())
+    .then(data => data)
+    .catch(error => error)
+}
+
+export const deletePost = (id) => {
+  return fetch(`${api}/posts/${id}`, { 
+    headers,
+    method: 'DELETE',
+  }).then(res => res.json())
+    .then(data => data)
+    .catch(error => error)
+}
+
 export const fetchPosts = () => {
   return fetch(`${api}/posts/`, { headers })
     .then(res => res.json())

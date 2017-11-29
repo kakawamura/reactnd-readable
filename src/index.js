@@ -4,7 +4,6 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
-import logger from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
 
 import App from './components/App';
@@ -17,7 +16,6 @@ const store = createStore(
   reducers,
   composeEnhancers(
     applyMiddleware(
-      logger,
       sagaMiddleware,
     )
   )

@@ -50,7 +50,6 @@ export function* voteComment(action) {
 export function* createComment(action) {
   try {
     const comment = yield call(API.createComment, action.comment)
-    console.log(comment)
     yield put({type: types.CREATE_COMMENT_SUCCEEDED, comment})
   } catch (error) {
     yield put({type: "VOTE_FAILED", error})
@@ -75,6 +74,15 @@ export function* deleteComment(action) {
   }
 }
 
+export function* fetchCategories(action) {
+  try {
+    const data = yield call(API.fetchCategories)
+    yield put({type: types.FETCH_CATEGORIES_SUCCEEDED, data})
+  } catch (error) {
+    yield put({type: "FETCH_FAILED", error})
+  }
+}
+
 export function* watchAPI() {
   yield takeEvery(types.FETCH_POSTS, fetchPosts)
   yield takeEvery(types.FETCH_POST, fetchPost)
@@ -84,6 +92,7 @@ export function* watchAPI() {
   yield takeEvery(types.CREATE_COMMENT, createComment)
   yield takeEvery(types.UPDATE_COMMENT, updateComment)
   yield takeEvery(types.DELETE_COMMENT, deleteComment)
+  yield takeEvery(types.FETCH_CATEGORIES, fetchCategories)
 }
 
 export default function* rootSaga() {

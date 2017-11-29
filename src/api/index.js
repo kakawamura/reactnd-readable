@@ -84,3 +84,10 @@ export const voteComment = (id, option) => {
     .then(data => data)
     .catch(error => error)
 }
+
+export const fetchCategories = () => {
+  return fetch(`${api}/categories`, { headers })
+    .then(res => res.json())
+    .then(data => data.categories)
+    .catch(error => error)
+}

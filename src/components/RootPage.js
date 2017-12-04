@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PostList from './PostList'
+import SortOperator from './SortOperator'
 import * as actionTypes from '../constants/actionTypes'
 import * as sortBy from '../constants/sortBy'
 import {
@@ -14,7 +15,7 @@ class RootPage extends Component {
     fetchPosts()
   }
 
-  onChangeSort(e) {
+  onChangeSort = (e) => {
     const { sortPosts } = this.props
     sortPosts(e.target.value)
   }
@@ -23,12 +24,9 @@ class RootPage extends Component {
     const { posts } = this.props
     return (
       <div>
-        <select onChange={(e) => this.onChangeSort(e)}>
-          <option value={sortBy.DATE_UP}>date up</option>
-          <option value={sortBy.DATE_DOWN}>date down</option>
-          <option value={sortBy.SCORE_UP}>score up</option>
-          <option value={sortBy.SCORE_DOWN}>score down</option>
-        </select>
+        <SortOperator 
+          onChangeSort={this.onChangeSort}
+        />
         <PostList 
           posts={posts.list}
         />

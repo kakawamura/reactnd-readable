@@ -21,7 +21,7 @@ const styles = {
     border: '1px solid #eee',
     lineHeight: `${buttonSize}px`,
     textAlign: 'center',
-    fontSize: 24,
+    fontSize: 32,
   },
 }
 

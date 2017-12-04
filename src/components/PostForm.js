@@ -7,11 +7,21 @@ import React, { Component } from 'react'
 class PostForm extends Component {
 
   state = {
-    form: {
+    post : {
       title: '',
       body: '',
       author: '',
       category: '',
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { post } = nextProps
+    if(post) {
+      console.log(post)
+      this.setState({
+        post: post,
+      })
     }
   }
 
@@ -20,8 +30,8 @@ class PostForm extends Component {
     this.setState((state) => {
       return {
         ...state,
-        form: {
-          ...state.form,
+        post: {
+          ...state.post,
           [key]: val,
         }
       }
@@ -30,28 +40,35 @@ class PostForm extends Component {
 
   render() {
     const { onClickSubmit } = this.props
-    const { form } = this.state
-    console.log(form)
+    const { post } = this.state
     return (
       <div>
         <label>
           Title
-          <input onChange={(e) => this.onChangeInput(e, 'title')}/>
+          <input
+            value={post.title}
+            onChange={(e) => this.onChangeInput(e, 'title')}/>
         </label>
         <label>
           Body
-          <textarea onChange={(e) => this.onChangeInput(e, 'body')}/>
+          <textarea 
+            value={post.body}
+            onChange={(e) => this.onChangeInput(e, 'body')}/>
         </label>
         <label>
           Author 
-          <input onChange={(e) => this.onChangeInput(e, 'author')}/>
+          <input
+            value={post.author}
+            onChange={(e) => this.onChangeInput(e, 'author')}/>
         </label>
         <label>
           Category
-          <input onChange={(e) => this.onChangeInput(e, 'category')}/>
+          <input 
+            value={post.category}
+            onChange={(e) => this.onChangeInput(e, 'category')}/>
         </label>
         <button 
-          onClick={() => onClickSubmit(form)}
+          onClick={() => onClickSubmit(post)}
         >submit</button>
       </div>
     )

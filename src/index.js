@@ -5,6 +5,7 @@ import './index.css';
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
+import logger from 'redux-logger'
 
 import App from './components/App';
 import reducers from './reducers'
@@ -16,6 +17,7 @@ const store = createStore(
   reducers,
   composeEnhancers(
     applyMiddleware(
+      logger,
       sagaMiddleware,
     )
   )

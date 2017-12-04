@@ -8,35 +8,34 @@ export function* createPost(action) {
     const post = yield call(API.createPost, action.post)
     yield put({type: types.CREATE_POST_SUCCEEDED, post})
   } catch (error) {
-    yield put({type: "CREATE_FAILED", error})
+    yield put({type: types.REQUEST_FAILED, error})
   }
 }
 
 export function* updatePost(action) {
   try {
-    const post = yield call(API.updatePost, post)
+    const post = yield call(API.updatePost, action.post)
     yield put({type: types.UPDATE_POST_SUCCEEDED, post})
   } catch (error) {
-    yield put({type: "VOTE_FAILED", error})
+    yield put({type: types.REQUEST_FAILED, error})
   }
 }
 
 export function* deletePost(action) {
   try {
-    const post = yield call(API.deleteComment, action.id)
+    const post = yield call(API.deletePost, action.id)
     yield put({type: types.DELETE_POST_SUCCEEDED, post})
   } catch (error) {
-    yield put({type: "VOTE_FAILED", error})
+    yield put({type: types.REQUEST_FAILED, error})
   }
 }
-
 
 export function* fetchPosts(action) {
   try {
     const data = yield call(API.fetchPosts)
     yield put({type: types.FETCH_POSTS_SUCCEEDED, data})
   } catch (error) {
-    yield put({type: "FETCH_FAILED", error})
+    yield put({type: types.REQUEST_FAILED, error})
   }
 }
 
@@ -45,7 +44,7 @@ export function* fetchPost(action) {
     const data = yield call(API.fetchPost, action.id)
     yield put({type: types.FETCH_POST_SUCCEEDED, data})
   } catch (error) {
-    yield put({type: "FETCH_FAILED", error})
+    yield put({type: types.REQUEST_FAILED, error})
   }
 }
 
@@ -54,7 +53,7 @@ export function* fetchPostComments(action) {
     const data = yield call(API.fetchPostComments, action.id)
     yield put({type: types.FETCH_POST_COMMENTS_SUCCEEDED, data})
   } catch (error) {
-    yield put({type: "FETCH_FAILED", error})
+    yield put({type: types.REQUEST_FAILED, error})
   }
 }
 
@@ -63,7 +62,7 @@ export function* votePost(action) {
     const post = yield call(API.votePost, action.id, action.option)
     yield put({type: types.VOTE_POST_SUCCEEDED, post})
   } catch (error) {
-    yield put({type: "VOTE_FAILED", error})
+    yield put({type: types.REQUEST_FAILED, error})
   }
 }
 
@@ -72,7 +71,7 @@ export function* voteComment(action) {
     const comment = yield call(API.voteComment, action.id, action.option)
     yield put({type: types.VOTE_COMMENT_SUCCEEDED, comment})
   } catch (error) {
-    yield put({type: "VOTE_FAILED", error})
+    yield put({type: types.REQUEST_FAILED, error})
   }
 }
 
@@ -81,7 +80,7 @@ export function* createComment(action) {
     const comment = yield call(API.createComment, action.comment)
     yield put({type: types.CREATE_COMMENT_SUCCEEDED, comment})
   } catch (error) {
-    yield put({type: "VOTE_FAILED", error})
+    yield put({type: types.REQUEST_FAILED, error})
   }
 }
 
@@ -90,7 +89,7 @@ export function* updateComment(action) {
     const comment = yield call(API.updateComment, action.id, action.body)
     yield put({type: types.UPDATE_COMMENT_SUCCEEDED, comment})
   } catch (error) {
-    yield put({type: "VOTE_FAILED", error})
+    yield put({type: types.REQUEST_FAILED, error})
   }
 }
 
@@ -99,7 +98,7 @@ export function* deleteComment(action) {
     const comment = yield call(API.deleteComment, action.id)
     yield put({type: types.DELETE_COMMENT_SUCCEEDED, comment})
   } catch (error) {
-    yield put({type: "VOTE_FAILED", error})
+    yield put({type: types.REQUEST_FAILED, error})
   }
 }
 
@@ -108,7 +107,7 @@ export function* fetchCategories(action) {
     const data = yield call(API.fetchCategories)
     yield put({type: types.FETCH_CATEGORIES_SUCCEEDED, data})
   } catch (error) {
-    yield put({type: "FETCH_FAILED", error})
+    yield put({type: types.REQUEST_FAILED, error})
   }
 }
 

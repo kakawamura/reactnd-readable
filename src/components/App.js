@@ -10,6 +10,7 @@ import RootPage from './RootPage'
 import PostDetailPage from './PostDetailPage'
 import CategoryPage from './CategoryPage'
 import NewPostPage from './NewPostPage'
+import EditPostPage from './EditPostPage'
 
 const styles = {
 }
@@ -23,6 +24,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={RootPage} />
               <Route exact path="/posts/new" component={NewPostPage} />
+              <Route exact path="/posts/:postID/edit" component={EditPostPage} />
               <Route exact path="/:category" component={CategoryPage} />
               <Route exact path="/:category/:postID" component={PostDetailPage} />
             </Switch>

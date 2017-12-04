@@ -29,6 +29,13 @@ const posts = (state = initialState, action) => {
           return l
         })
       }
+    case types.DELETE_POST_SUCCEEDED:
+      return {
+        ...state,
+        list: state.list.filter(l => {
+          return l.id != action.post.id    
+        })
+      }
     case types.SORT_POSTS:
       return {
         ...state,

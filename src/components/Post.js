@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import Radium from 'radium'
 import VotePost from './VotePost'
 import PostOperation from './PostOperation'
-import timestamp from 'unix-timestamp'
 
 const styles = {
   post: {
@@ -51,7 +50,7 @@ class Post extends Component {
           </Link>
         </span>
         <div style={styles.description}>
-          <span>{post.timestamp}</span>
+          <span>{this.formatDate(post.timestamp)}</span>
           <span style={styles.seperator}>/</span>
           <span>{post.author}</span>
           <span style={styles.seperator}>/</span>
@@ -69,7 +68,7 @@ class Post extends Component {
   }
 
   formatDate = (time) => {
-    const date = timestamp.toDate(time)
+    const date = new Date(time)
     return `Published ${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`
   }
 }

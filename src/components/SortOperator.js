@@ -15,10 +15,10 @@ class SortOperator extends Component {
     return (
       <div style={styles.wrapper}>
         <select onChange={(e) => onChangeSort(e)}>
-          <option value={sortBy.DATE_UP}>date up</option>
           <option value={sortBy.DATE_DOWN}>date down</option>
-          <option value={sortBy.SCORE_UP}>score up</option>
+          <option value={sortBy.DATE_UP}>date up</option>
           <option value={sortBy.SCORE_DOWN}>score down</option>
+          <option value={sortBy.SCORE_UP}>score up</option>
         </select>
       </div>
     )

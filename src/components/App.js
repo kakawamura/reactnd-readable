@@ -12,9 +12,6 @@ import CategoryPage from './CategoryPage'
 import NewPostPage from './NewPostPage'
 import EditPostPage from './EditPostPage'
 
-const styles = {
-}
-
 class App extends Component {
   render() {
     return (

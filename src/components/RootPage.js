@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PostList from './PostList'
 import SortOperator from './SortOperator'
-import * as actionTypes from '../constants/actionTypes'
-import * as sortBy from '../constants/sortBy'
 import {
   sortPosts,
 } from '../actions/posts'

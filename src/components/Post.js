@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import Radium from 'radium'
-import Vote from './Vote'
+import VotePost from './VotePost'
 import PostOperation from './PostOperation'
 import timestamp from 'unix-timestamp'
 
@@ -27,6 +27,9 @@ const styles = {
   seperator: {
     margin: '0 8px',
   },
+  bottom: {
+    marginTop: 16,
+  }
 }
 
 class Post extends Component {
@@ -53,12 +56,14 @@ class Post extends Component {
           <span>{post.author}</span>
           <span style={styles.seperator}>/</span>
           <span>{post.commentCount} comments</span>
+        </div>
+        <div style={styles.bottom}>
+          <VotePost
+            post={post}
+          />
           <span style={styles.seperator}>/</span>
           <PostOperation post={post} />
         </div>
-        <Vote
-          post={post}
-        />
       </div>
     )
   }

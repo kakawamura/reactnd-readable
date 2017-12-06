@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as types from '../constants/actionTypes'
+import Vote from './Vote'
 
 class VoteComment extends Component {
 
   render() {
     const { comment, voteComment } = this.props
     return (
-      <div>
-        <button onClick={() => voteComment(comment.id, "upVote")}>up</button>
-        <p>{comment.voteScore}</p>
-        <button onClick={() => voteComment(comment.id, "downVote")}>down</button>
-      </div>
+      <Vote
+        score={comment.voteScore}
+        voteUp={() => voteComment(comment.id, "upVote")}
+        voteDown={() => voteComment(comment.id, "downVote")}
+      />
     )
   }
 }

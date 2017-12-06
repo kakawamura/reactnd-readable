@@ -7,10 +7,6 @@ import uuid from 'uuid/v4'
 
 class NewPostPage extends Component {
 
-  componentWillMount() {
-    const {} = this.props
-  }
-
   onClickSubmit = (post) => {
     const { createPost, history } = this.props
     post.id = uuid()
@@ -20,7 +16,6 @@ class NewPostPage extends Component {
   }
 
   render() {
-   const {} = this.props
     return (
       <div>
         <h2>Create New Post</h2>

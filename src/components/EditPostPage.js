@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { withRouter } from "react-router-dom";
 import PostForm from './PostForm'
 import * as types from '../constants/actionTypes'
-import uuid from 'uuid/v4'
 
 class EditPostPage extends Component {
 

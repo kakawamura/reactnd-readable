@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Radium from 'radium'
+import {
+  Icon,
+} from 'antd'
 import * as types from '../constants/actionTypes'
-import Trash from 'react-icons/lib/fa/trash-o'
-import Edit from 'react-icons/lib/fa/edit'
 
 const styles = {
   icon: {
     cursor: 'pointer',
-    padding: 8,
-    fontSize: 20,
+    margin: '0 8px',
   }
 }
 
@@ -24,14 +24,16 @@ class PostOperation extends Component {
   render() {
     const { post, deletePost } = this.props
     return (
-      <div>
-        <Trash 
-          style={styles.icon}
-          onClick={() => deletePost(post.id)} />
-        <Edit 
+      <span>
+        <Icon
+          type="edit"
           style={styles.icon}
           onClick={() => this.editPost(post.id)} />
-      </div>
+        <Icon
+          type="delete"
+          style={styles.icon}
+          onClick={() => deletePost(post.id)} />
+      </span>
     )
   }
 }

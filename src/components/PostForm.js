@@ -18,7 +18,6 @@ class PostForm extends Component {
   componentWillReceiveProps(nextProps) {
     const { post } = nextProps
     if(post) {
-      console.log(post)
       this.setState({
         post: post,
       })

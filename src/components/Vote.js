@@ -1,44 +1,34 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import ThumbsUp from 'react-icons/lib/fa/thumbs-o-up'
-import ThumbsDown from 'react-icons/lib/fa/thumbs-o-down'
 import Radium from 'radium'
+import {
+  Icon,
+} from 'antd'
 
 const styles = {
-  thumb: {
+  button: {
+    margin: '0 8px',
     cursor: 'pointer',
-    padding: '0 8px',
-    fontSize: 20,
-  },
+  }
 }
 
 class Vote extends Component {
 
   render() {
-    const { post, votePost } = this.props
+    const { score, voteUp, voteDown } = this.props
     return (
-      <div>
-          <ThumbsUp 
-            style={styles.thumb} 
-            onClick={() => votePost(post.id, "upVote")}/>
-        <span>{post.voteScore}</span>
-        <ThumbsDown 
-          style={styles.thumb} 
-          onClick={() => votePost(post.id, "downVote")}/>
-      </div>
+      <span>
+        <Icon
+          style={styles.button}
+          type="like-o"
+          onClick={() => voteUp()} />
+        <span>{score}</span>
+        <Icon
+          style={styles.button}
+          type="dislike-o"
+          onClick={() => voteDown()} />
+      </span>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    votePost: (id, option) => dispatch({type: 'VOTE_POST', id, option}),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Radium(Vote))
+export default Radium(Vote)

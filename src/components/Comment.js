@@ -1,20 +1,50 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import {
+  Icon,
+} from 'antd'
+import Radium from 'radium'
+import nl2br from 'react-nl2br'
 import VoteComment from './VoteComment'
+import CommentForm from './CommentForm'
 import * as types from '../constants/actionTypes'
+
+const styles = {
+  wrapper: {
+    margin: '16px 0',
+    borderBottom: '1px solid #eee',
+  },
+  author: {
+    fontWeight: 600,
+    marginBottom: 8,
+    fontSize: 14,
+  },
+  body: {
+    lineHeight: '24px',
+  },
+  icon: {
+    cursor: 'pointer',
+    margin: '0 8px',
+  },
+  bottom: {
+    margin: '16px 0',
+  },
+}
 
 class Comment extends Component {
 
   state = {
     editing: false,
-    body: '',
   }
 
   onClickEdit = () => {
     const { comment } = this.props
-    this.setState({
-      body: comment.body,
-      editing: true,
+    this.setState((state) => {
+      return {
+        ...state,
+        body: comment.body,
+        editing: !state.editing,
+      }
     })
   }
 
@@ -34,16 +64,9 @@ class Comment extends Component {
     })
   }
 
-  onClickSubmit() {
+  onClickSubmit(newComment) {
     const { comment, updateComment } = this.props
-    const { body }= this.state
-    updateComment(comment.id, body)
-    this.setState({
-      editing: false,
-    })
-  }
-
-  onClickCancel() {
+    updateComment(comment.id, newComment.body)
     this.setState({
       editing: false,
     })
@@ -51,22 +74,38 @@ class Comment extends Component {
 
   render() {
     const { comment } = this.props
-    const { editing, body } = this.state
+    const { editing } = this.state
     return (
-      <div>
-        <VoteComment
-          comment={comment}
-        />
-        <button onClick={() => this.onClickEdit()}>Edit</button>
-        <button onClick={() => this.onClickDelete()}>Delete</button>
+      <div style={styles.wrapper}>
         {editing && 
           <div>
-            <input defaultValue={body} onChange={(e) => this.onChangeComment(e)}></input>
-            <button onClick={() => this.onClickSubmit()}>Submit</button>
-            <button onClick={() => this.onClickCancel()}>Cancel</button>
+            <CommentForm
+              comment={comment}
+              onClickSubmit={(comment) => this.onClickSubmit(comment)}
+            />
           </div>
         }
-        {!editing && <p>{comment.body}</p>}
+        {!editing && <div>
+          <p style={styles.author}>{comment.author}</p>
+          <p style={styles.body}>{nl2br(comment.body)}</p>
+        </div>
+        }
+        <div style={styles.bottom}>
+          <VoteComment
+            comment={comment}
+          />
+          <span>/</span>
+          <Icon
+            style={styles.icon}
+            type="edit"
+            shape="circle"
+            onClick={() => this.onClickEdit()} />
+          <Icon
+            style={styles.icon}
+            type="delete"
+            shape="circle"
+            onClick={() => this.onClickDelete()} />
+        </div>
       </div>
     )
   }
@@ -83,4 +122,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Comment)
+export default connect(mapStateToProps, mapDispatchToProps)(Radium(Comment))

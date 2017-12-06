@@ -1,56 +1,28 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as types from '../constants/actionTypes'
 import uuid from 'uuid/v4'
+import * as types from '../constants/actionTypes'
+import CommentForm from './CommentForm'
 
 class AddComment extends Component {
 
-  state = {
-    author: '',
-    body: '',
-  }
-
-  onChangeAuthor = (e) => {
-    this.setState({
-      author: e.target.value,
-    })
-  }
-
-  onChangeBody = (e) => {
-    this.setState({
-      body: e.target.value,
-    })
-  }
-
-  onClickAdd = () => {
+  onClickAdd = (comment) => {
     const { post, createComment } = this.props
-    const { author, body } = this.state
     createComment({
       id: uuid(),
       parentId: post.id,
-      author,
-      body,
-    })
-    this.setState({
-      author: '',
-      body: '',
+      author: comment.author,
+      body: comment.body,
     })
   }
 
   render() {
-    const { body, author } = this.state
     return (
       <div>
-        <h2>Comments</h2>
-        <input
-          defaultValue={author}
-          onChange={(e) => this.onChangeAuthor(e)}
+        <h2>Add Comments</h2>
+        <CommentForm
+          onClickSubmit={(comment) => this.onClickAdd(comment)}
         />
-        <textarea
-          defaultValue={body}
-          onChange={(e) => this.onChangeBody(e)}
-        />
-        <button onClick={() => this.onClickAdd()}>add comment</button>
       </div>
     )
   }
@@ -58,7 +30,6 @@ class AddComment extends Component {
 
 const mapStateToProps = (state) => {
   return {
-
   }
 }
 

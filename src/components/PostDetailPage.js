@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import nl2br from 'react-nl2br'
 import * as types from '../constants/actionTypes'
 import CommentList from './CommentList'
 import AddComment from './AddComment'
@@ -21,7 +22,9 @@ class PostDetailPage extends Component {
         <Post
           post={posts.detail}
         />
-        <div>{posts.detail.title}</div>
+        <div>
+          {nl2br(posts.detail.body)}
+        </div>
         <CommentList 
           comments={comments.list}
         />

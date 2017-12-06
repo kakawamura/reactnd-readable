@@ -18,11 +18,17 @@ class PostOperation extends Component {
 
   editPost = (id) => {
     const { history } = this.props  
-    history.push(`posts/${id}/edit`)
+    history.push(`/posts/${id}/edit`)
+  }
+
+  deletePost = (id) => {
+    const { history, deletePost } = this.props
+    deletePost(id)
+    history.push('/')
   }
 
   render() {
-    const { post, deletePost } = this.props
+    const { post } = this.props
     return (
       <span>
         <Icon
@@ -32,7 +38,7 @@ class PostOperation extends Component {
         <Icon
           type="delete"
           style={styles.icon}
-          onClick={() => deletePost(post.id)} />
+          onClick={() => this.deletePost(post.id)} />
       </span>
     )
   }

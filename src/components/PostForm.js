@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import {
+  Button,
+  Input,
+  Form,
+  Select,
+} from 'antd'
 
-// title - [String]
-// body - [String]
-// author - [String]
-// category - Any of the categories listed in 
 class PostForm extends Component {
 
   state = {
@@ -25,7 +28,7 @@ class PostForm extends Component {
   }
 
   onChangeInput = (e, key) => {
-    const val = e.target.value
+    const val = (key === 'category') ? e : e.target.value
     this.setState((state) => {
       return {
         ...state,
@@ -38,41 +41,61 @@ class PostForm extends Component {
   }
 
   render() {
-    const { onClickSubmit } = this.props
+    const { categories, onClickSubmit } = this.props
     const { post } = this.state
     return (
       <div>
-        <label>
-          Title
-          <input
+        <Form.Item
+          label="Title">
+          <Input
             value={post.title}
             onChange={(e) => this.onChangeInput(e, 'title')}/>
-        </label>
-        <label>
-          Body
-          <textarea 
+        </Form.Item>
+        <Form.Item
+          label="Body">
+          <Input.TextArea
+            rows={4}
             value={post.body}
             onChange={(e) => this.onChangeInput(e, 'body')}/>
-        </label>
-        <label>
-          Author 
-          <input
+        </Form.Item>
+        <Form.Item
+          label="Author">
+          <Input
             value={post.author}
             onChange={(e) => this.onChangeInput(e, 'author')}/>
-        </label>
-        <label>
-          Category
-          <input 
+        </Form.Item>
+        <Form.Item
+          label="Category">
+          <Select
+            showSearch
             value={post.category}
-            onChange={(e) => this.onChangeInput(e, 'category')}/>
-        </label>
-        <button 
+            style={{ width: 200 }}
+            placeholder="Select Category"
+            onChange={(value) => this.onChangeInput(value, 'category')}>
+            {categories.map(c => {
+              return <Select.Option key={c.name} value={c.name}>
+                {c.name}
+                </Select.Option>
+            })}
+          </Select>
+        </Form.Item>
+        <Button 
           onClick={() => onClickSubmit(post)}
-        >submit</button>
+        >Send</Button>
       </div>
     )
   }
 }
 
-export default PostForm
+const mapStateToProps = (state) => {
+  return {
+    categories: state.categories.list,
+  }
+}
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostForm)

@@ -21,11 +21,9 @@ const posts = (state = initialState, action) => {
     case types.VOTE_POST_SUCCEEDED:
       return {
         ...state,
+        detail: (state.detail.id === action.post.id) ? action.post : state.detail,
         list: state.list.map(l => {
-          if(l.id === action.post.id) {
-            return action.post
-          }
-          return l
+          return (l.id === action.post.id) ? action.post : l
         })
       }
     case types.DELETE_POST_SUCCEEDED:

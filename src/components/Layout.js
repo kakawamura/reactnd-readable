@@ -23,6 +23,10 @@ const styles = {
     textAlign: 'center',
     fontSize: 32,
   },
+  wrapper: {
+    width: 800,
+    margin: '0 auto',
+  }
 }
 
 class Layout extends Component {
@@ -37,12 +41,13 @@ class Layout extends Component {
     return (
       <div style={styles.layout}>
         <Header categories={categories.list}/>
-        {this.props.children}
+        <div style={styles.wrapper}>
+          {this.props.children}
+        </div>
         <Link
           to='/posts/new'
           style={styles.new}
         >+</Link>
-
       </div>
     )
   }

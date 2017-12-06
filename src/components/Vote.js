@@ -1,5 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import ThumbsUp from 'react-icons/lib/fa/thumbs-o-up'
+import ThumbsDown from 'react-icons/lib/fa/thumbs-o-down'
+import Radium from 'radium'
+
+const styles = {
+  thumb: {
+    cursor: 'pointer',
+    padding: '0 8px',
+    fontSize: 20,
+  },
+}
 
 class Vote extends Component {
 
@@ -7,9 +18,13 @@ class Vote extends Component {
     const { post, votePost } = this.props
     return (
       <div>
-        <button onClick={() => votePost(post.id, "upVote")}>up</button>
-        <p>{post.voteScore}</p>
-        <button onClick={() => votePost(post.id, "downVote")}>down</button>
+          <ThumbsUp 
+            style={styles.thumb} 
+            onClick={() => votePost(post.id, "upVote")}/>
+        <span>{post.voteScore}</span>
+        <ThumbsDown 
+          style={styles.thumb} 
+          onClick={() => votePost(post.id, "downVote")}/>
       </div>
     )
   }
@@ -26,4 +41,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Vote)
+export default connect(mapStateToProps, mapDispatchToProps)(Radium(Vote))

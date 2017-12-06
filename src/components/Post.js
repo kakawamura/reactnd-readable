@@ -53,11 +53,12 @@ class Post extends Component {
           <span>{post.author}</span>
           <span style={styles.seperator}>/</span>
           <span>{post.commentCount} comments</span>
+          <span style={styles.seperator}>/</span>
+          <PostOperation post={post} />
         </div>
         <Vote
           post={post}
         />
-        <PostOperation post={post} />
       </div>
     )
   }

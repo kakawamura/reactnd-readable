@@ -41,7 +41,7 @@ class AddComment extends Component {
     const { body, author } = this.state
     return (
       <div>
-        add comment
+        <h2>Comments</h2>
         <input
           defaultValue={author}
           onChange={(e) => this.onChangeAuthor(e)}

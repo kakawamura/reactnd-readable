@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router'
 import nl2br from 'react-nl2br'
 import * as types from '../constants/actionTypes'
 import CommentList from './CommentList'
 import AddComment from './AddComment'
 import Post from './Post'
+import NotFound from './NotFound'
 
 class PostDetailPage extends Component {
 
@@ -17,6 +19,11 @@ class PostDetailPage extends Component {
 
   render() {
     const { posts, comments } = this.props
+    
+    if(posts.detail.id === undefined)  {
+      return <NotFound />
+    }
+
     return (
       <div>
         <Post
